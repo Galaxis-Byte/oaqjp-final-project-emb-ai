@@ -1,3 +1,7 @@
+"""
+This Python script creates a Flask application to detect emotions
+from the given text using the emotion_detector function.
+"""
 from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
@@ -5,10 +9,20 @@ app = Flask("Emotion App")
 
 @app.route("/")
 def index():
+    """
+    Renders the homepage.
+    """
     return render_template("index.html")
 
 @app.route("/emotionDetector")
 def detect_emotion():
+    """
+    Detect the dominant emotion from the given text.
+
+    Returns:
+        A formatted string containing emotion scores and the dominant emotion.
+        If the text is invalid, returns an error message.
+    """
     # Send and receive response from API
     text_to_analyze = request.args.get("textToAnalyze")
     response = emotion_detector(text_to_analyze)
